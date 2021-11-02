@@ -16,6 +16,15 @@ code {
 
   color: #333;
 }
+.container {
+  max-width: 500px;
+  margin: 30px auto;
+  overflow: auto;
+  min-height: 300px;
+  border: 1px solid #20b2aa;
+  padding: 30px;
+  border-radius: 5px;
+}
 .create {
   max-width: 400px;
   margin: 0 auto;
@@ -38,19 +47,18 @@ code {
   box-sizing: border-box;
   display: block;
 }
-.create button {
-  background: #20b2aa;
-  color: #fff;
-  border: 0;
-  padding: 8px;
-  border-radius: 8px;
-  cursor: pointer;
-}
+
 .ul li {
-  color: blueviolet;
+  color: #020105;
   list-style-position: outside;
   margin: 0;
   padding-left: 1px;
+  list-style-type: none;
+  left: auto;
+  text-align: left;
+}
+.ul li:before {
+  content: "✓";
 }
 
 /* Rectangle 1 */
@@ -59,8 +67,8 @@ code {
   position: absolute;
   width: 109px;
   height: 15px;
-  left: 260px;
-  top: 100px;
+  left: auto;
+  top: auto;
 
   background: #ff4758;
   border-radius: 6px;
@@ -72,8 +80,8 @@ code {
   position: absolute;
   width: 109px;
   height: 15px;
-  left: 370px;
-  top: 100px;
+  left: 360px;
+  top: auto;
 
   background: #ffa600;
   border-radius: 6px;
@@ -85,8 +93,8 @@ code {
   position: absolute;
   width: 109px;
   height: 15px;
-  left: 480px;
-  top: 100px;
+  left: 460px;
+  top: auto;
 
   background: #27b160;
   border-radius: 6px;
