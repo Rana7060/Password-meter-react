@@ -1,12 +1,13 @@
 import { useState } from "react";
+import ProgressBar from "./components/ProgressBar";
 
 const Home = () => {
-  const [weak, setWeak] = useState(false);
-  const [medium, setMedium] = useState(false);
-  const [strong, setStrong] = useState(false);
+  const [completed, setCompleted] = useState(0);
+  const [data, setData] = useState("");
+  const [bgColor, setBgColor] = useState("");
 
   function validatePassword() {
-    var p = document.getElementById("myInput").value;
+    var p = document.getElementById("password").value;
 
     if (p.length >= 8) {
       var m = document.getElementById("Q");
@@ -28,18 +29,26 @@ const Home = () => {
     return true;
   }
 
-  function colorMeter() {
-    var colorValue = document.getElementById("myInput").value;
-    if (colorValue.length === 4) {
-      setWeak(true);
+  function colorMeter(value) {
+    if (value.length >= 4) {
+      setCompleted(30);
+      setBgColor("#ff4758");
+      setData("weak");
     }
-    if (colorValue.length === 8) {
-      setMedium(true);
+    if (value.length >= 8) {
+      setCompleted(60);
+      setBgColor("#ffa600");
+      setData("medium");
     }
-    if (colorValue.length === 12) {
-      var u = document.getElementById("U");
-      u.setAttribute("style", "color: #ccc;");
-      setStrong(true);
+    if (
+      value.length >= 12 &&
+      value.match(/[A-Z]/) &&
+      value.match(/[a-z]/) &&
+      value.match(/[0-9]/)
+    ) {
+      setCompleted(100);
+      setBgColor("#27b160");
+      setData("Strong!");
     }
   }
 
@@ -52,41 +61,28 @@ const Home = () => {
             type="password"
             placeholder="Enter your password"
             className="input"
-            id="myInput"
             onChange={(e) => {
-              colorMeter();
+              colorMeter(e.target.value);
               validatePassword();
             }}
+            autoComplete="new-password"
+            id="password"
+            name="password"
           ></input>
         </form>
-        {weak && (
-          <div className="first">
-            <br />
-            <p style={{ color: "#ff4758" }}>Weak</p>
-          </div>
-        )}
-        {medium && (
-          <div className="second">
-            <br />
-            <p style={{ color: "#ffa600" }}>Medium</p>
-          </div>
-        )}
-        {strong && (
-          <div className="third">
-            <br />
-            <p style={{ color: "#27b160" }}>Strong</p>
-          </div>
-        )}
 
-        <br />
-        <br />
-        <br />
+        <ProgressBar
+          bgcolor={bgColor}
+          completed={completed}
+          data={data}
+          className="progress"
+        />
+
         <ul className="ul">
           <li id="Q"> Must contain 8 characters</li>
           <li id="R"> Must have at least one letter</li>
           <li id="S"> Must have at least one digit</li>
           <li id="T"> Must have at least one capital letter</li>
-          <li id="U"> Must be at least 12 charaters long</li>
         </ul>
       </div>
     </div>
